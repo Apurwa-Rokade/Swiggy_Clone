@@ -1,8 +1,35 @@
-# React + Vite
+# FoodExplorer
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+FoodExplorer is a web application that allows users to explore and discover a variety of food items from different cuisines. Users can filter food items by area and sort them alphabetically. Clicking on a food item opens a modal with detailed information about the selected item.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Filtering**: Filter food items by area.
+- **Sorting**: Sort food items alphabetically.
+- **Modal**: Detailed view of each food item.
+- **Pagination**: Navigate through multiple pages of food items.
+
+## Technologies Used
+
+- React
+- React Router
+- Context API (for state management)
+- Tailwind CSS (for styling)
+- API: [The MealDB](https://www.themealdb.com/api.php)
+
+## Setup Instructions
+
+1. Clone the repository:
+
+   ```bash
+   git clone <repository-url>
+   cd FoodExplorer
+
+2. Install dependencies:
+   npm install
+  
+
+3. Start the application:
+    npm run dev
+
+
