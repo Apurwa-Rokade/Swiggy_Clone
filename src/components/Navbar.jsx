@@ -4,7 +4,7 @@ import { IoSearch } from "react-icons/io5";
 const Navbar = () => {
   return (
     <nav className=" flex  md:flex-row items-center flex-col shadow-xl p-4 justify-between">
-      <img src="/swiggy.svg" alt="swiggy logo" style={{ width: "150px" }} />
+      <img src="./src/assets/swiggy.svg" alt="swiggy logo" style={{ width: "150px" }} />
       <div className="flex items-center relative h-100%">
         <input
           type="search"
