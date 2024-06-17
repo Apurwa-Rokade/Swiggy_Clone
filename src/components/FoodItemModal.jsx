@@ -32,7 +32,7 @@ const FoodItemModal = () => {
     <>
     
     {foodItem ? (
-      <div className='relative top-0 left-0 w-full h-full  flex justify-center items-center z-50 overflow-auto max-w-[1200px] md:mx-auto  my-3 gap-5 mx-2'>
+      <div className='relative top-0 left-0 w-full h-full  flex justify-center items-center z-50 overflow-auto max-w-[1200px] md:mx-auto  my- gap-5 mx-2'>
       <div className='bg-white p-4 rounded-md shadow-lg max-w-3xl w-full'>
         <h2 className='text-2xl font-semibold mb-4'>{foodItem.strMeal}</h2>
         <img
