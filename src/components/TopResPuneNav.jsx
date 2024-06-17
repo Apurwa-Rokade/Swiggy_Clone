@@ -1,10 +1,15 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { MdFilterAlt } from "react-icons/md";
 import { IoIosArrowDown } from "react-icons/io";
 import { FaSort } from "react-icons/fa";
 
 const TopResPuneNav = ({setShowDropdown,showDropdown,toggleSortOrder, areas,setPendingArea,applyAreaSelection}) => {
+  const [searchTerm, setSearchTerm] = useState('g');
 
+  const filteredAreas = areas.filter(area =>
+    area.strArea.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+  console.log(areas)
   const items= [
   {
     name:"Filter",
@@ -66,32 +71,39 @@ const TopResPuneNav = ({setShowDropdown,showDropdown,toggleSortOrder, areas,setP
         </div>
 
         {showDropdown && (
-          <div className='absolute top-12 left-0 bg-white shadow-lg rounded-md p-4 transition-transform transform origin-top-left'>
-            <p className='text-lg font-semibold mb-2'>Filter By Area</p>
-            <ul>
-              {areas.map((area) => (
-                <li key={area.strArea}>
-                  <label className='flex items-center cursor-pointer'>
-                    <input
-                      type='radio'
-                      name='area'
-                      value={area.strArea}
-                      onChange={() => setPendingArea(area.strArea)}
-                      className='mr-2'
-                    />
-                    {area.strArea}
-                  </label>
-                </li>
-              ))}
-            </ul>
-            <button
-              onClick={applyAreaSelection}
-              className='mt-2 px-4 py-2 bg-blue-500 text-white rounded-md'
-            >
-              Apply
-            </button>
-          </div>
-        )}
+      <div className='absolute top-12 left-0 bg-white shadow-lg rounded-md p-4 transition-transform transform origin-top-left z-50' style={{ maxHeight: '300px', overflowY: 'auto' }}>
+        <p className='text-lg font-semibold mb-2'>Filter By Area</p>
+        <input
+          type='text'
+          placeholder='Search...'
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className='mb-2 p-2 w-full border rounded-md'
+        />
+        <ul>
+          {filteredAreas.map((area) => (
+            <li key={area.strArea}>
+              <label className='flex items-center cursor-pointer'>
+                <input
+                  type='radio'
+                  name='area'
+                  value={area.strArea}
+                  onChange={() => setPendingArea(area.strArea)}
+                  className='mr-2'
+                />
+                {area.strArea}
+              </label>
+            </li>
+          ))}
+        </ul>
+        <button
+          onClick={applyAreaSelection}
+          className='mt-2 px-4 py-2 bg-blue-500 text-white rounded-md'
+        >
+          Apply
+        </button>
+      </div>
+    )}
     </div>
   )
 }

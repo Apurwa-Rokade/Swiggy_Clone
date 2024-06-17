@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import TopResPuneNav from './TopResPuneNav';
 import { FaStar } from "react-icons/fa";
 import { Link } from 'react-router-dom';
+import { TbPlayerTrackPrevFilled ,TbPlayerTrackNextFilled} from "react-icons/tb";
 
 const TopResPune = () => {
 
@@ -11,6 +12,7 @@ const TopResPune = () => {
   const [foodItems, setFoodItems] = useState([]);
   const [sortOrder, setSortOrder] = useState('asc');
   const [pendingArea, setPendingArea] = useState('Indian');
+  const [page, setPage] = useState(1);
   useEffect(() => {
     fetchAreas();
     fetchFoodItemsByArea('Indian'); 
@@ -25,8 +27,18 @@ const TopResPune = () => {
       console.error('Error fetching areas:', error);
     }
   };
-
- 
+  const selectPageHandler = (selectedPage) => {
+    if (selectedPage >= 1 && selectedPage <= foodItems.length / 10 && selectedPage !== page) {
+      setPage(selectedPage)
+    }
+  }
+  const SelectedPageHandler= (selectedPage) =>{
+    if(selectedPage >=1 &&
+      selectedPage <=Math.ceil(foodItems.length/8)  &&
+      selectedPage !==page
+    )
+    setPage(selectedPage)
+  }
   const applyAreaSelection = () => {
     setSelectedArea(pendingArea);
     setShowDropdown(false); // Hide dropdown after selection
@@ -85,7 +97,7 @@ const TopResPune = () => {
       />
       {foodItems.length ==0 &&<div className=' text-center text-4xl font-bold leading-6 tracking-tight text-gray-700'>Loading...........</div>}
       <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 w-full mt-4'>
-        {foodItems.map((foodItem) => (
+        {foodItems.slice(page *8-8,page*8).map((foodItem) => (
           <div key={foodItem.idMeal} className='bg-white  shadow-md rounded-lg p-4'>
           <Link to={`/Deatils/${foodItem.idMeal}`}>
             <img
@@ -99,8 +111,31 @@ const TopResPune = () => {
           </div>
         ))}
       </div>
-  
-    </div>
+     {/* pagination */}
+     {
+      foodItems.length >0 && <div>
+     <div className='flex items-center p-2.5 my-4 justify-center cursor-pointer '>
+     <span  className={ `px-5 py-4 border border-gray-500 ${page>1 ?'':'opacity-50 cursor-not-allowed'}` }
+      onClick={()=>SelectedPageHandler(page-1)}
+     ><TbPlayerTrackPrevFilled  /></span>
+       {
+        [...Array(Math.ceil(foodItems.length / 8))].map(
+          (_,i)=>{
+            return(
+            <span className={`px-5 py-3 border border-gray-500 ${page == i+1 ?'bg-gray-300' :""}`} key={i}
+            onClick={()=>SelectedPageHandler(i+1)}
+            >{i+1}</span>            
+          )
+          })
+       }
+       <span className={ `px-5 py-4 border border-gray-500 ${page<(Math.ceil(foodItems.length/8)) ?'':'opacity-50 cursor-not-allowed'}`}
+        onClick={()=>SelectedPageHandler(page+1)}
+       ><TbPlayerTrackNextFilled /></span>
+     </div>
+      </div>
+     }
+      </div>
+   
   )
 }
 
