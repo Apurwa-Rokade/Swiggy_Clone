@@ -4,7 +4,7 @@ import { IoIosArrowDown } from "react-icons/io";
 import { FaSort } from "react-icons/fa";
 
 const TopResPuneNav = ({setShowDropdown,showDropdown,toggleSortOrder, areas,setPendingArea,applyAreaSelection}) => {
-  const [searchTerm, setSearchTerm] = useState('g');
+  const [searchTerm, setSearchTerm] = useState('');
 
   const filteredAreas = areas.filter(area =>
     area.strArea.toLowerCase().includes(searchTerm.toLowerCase())

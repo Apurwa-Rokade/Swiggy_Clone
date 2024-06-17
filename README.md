@@ -26,10 +26,12 @@ FoodExplorer is a web application that allows users to explore and discover a va
    cd FoodExplorer
 
 2. Install dependencies:
+```bash
    npm install
-  
+    
 
 3. Start the application:
+```bash
     npm run dev
 
 

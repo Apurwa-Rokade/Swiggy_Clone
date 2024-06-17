@@ -1,9 +1,17 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 
 const TopRes = () => {
   const[ slide, setSlide] = useState(0);
-  const [ data, seData] = useState();
+  const [ data, setData] = useState();
+  getTopFoodItem =async()=>{
+    let response = await fetch("www.themealdb.com/api/json/v1/1/filter.php?a=Canadian");
+    let data = await response.json();
+    setData(data);
+  }
+  useEffect(()=>{
+    getTopFoodItem();
+  },[])
   const nextSlide = () => {
     if (slide < Category.length - 5) {
       setSlide(slide + 1);
@@ -30,7 +38,17 @@ const TopRes = () => {
           <div className=" cursor-pointer w-[30px] h-[30px] flex justify-center items-center bg-[#e2e2e7] rounded-full mx-2" onClick={nextSlide}>
             <FaArrowRight />
           </div>
-         
+          {
+            data.map(
+              (item)=>{
+                return(
+                  <div>
+                    {item.strMeal}
+                  </div>
+                )
+              }
+            )
+          }
         </div>
       </div></div>
   )
