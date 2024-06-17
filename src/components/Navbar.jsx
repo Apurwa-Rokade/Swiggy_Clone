@@ -14,7 +14,7 @@ const Navbar = () => {
            rounded-lg text-sm"
         />
         {/* Example of using an icon for search */}
-        <IoSearch className="absolute right-2 h-full text-slate-500" />
+        <IoSearch className="absolute right-2  text-slate-500 h-full" />
       </div>
     </nav>
   );
